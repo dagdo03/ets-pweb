@@ -9,18 +9,31 @@ const getMovies = async () => {
         .then(response => {
             for (let index = 0; index < response.length; index++) {
                 let outputTitle = '';
-                // let outputTitle =+ '<div>';
                 const elementTitle = response[index];
                 const elementPlot = response[index];
+                
+                // Creating a new card for each index
+                const card = document.createElement('div');
+                card.classList.add('card', 'container', 'my-3'); // Adding some Bootstrap classes for styling
+            
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+            
                 const optionTitle = document.createElement('h3');
                 const optionPlot = document.createElement('p');
-                console.log(elementTitle.Title);
-                console.log(elementPlot.Plot);
+            
                 optionPlot.innerHTML = elementPlot.Plot;
                 optionTitle.innerHTML = elementTitle.Title;
-                document.getElementById('title').appendChild(optionTitle);
-                document.getElementById('plot').appendChild(optionPlot);
-                
+            
+                // Appending title and plot to the card body
+                cardBody.appendChild(optionTitle);
+                cardBody.appendChild(optionPlot);
+            
+                // Appending card body to the card
+                card.appendChild(cardBody);
+            
+                // Appending the card to the main container
+                document.getElementById('card').appendChild(card);
             }
         })
         .catch(err = console.error(err));
